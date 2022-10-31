@@ -9,7 +9,10 @@ import java.util.Optional;
 
 public class MemberService {
 
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    private final MemberRepository memberRepository;
+    public MemberService(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
 
     public Long join(Member member) {
         validateDuplicateMember(member); //중복 회원 검증
@@ -22,7 +25,6 @@ public class MemberService {
                     throw new IllegalStateException("이미 존재하는 회원입니다.");
                 });
     }
-
 
     /**
      * 전체 회원 조회
